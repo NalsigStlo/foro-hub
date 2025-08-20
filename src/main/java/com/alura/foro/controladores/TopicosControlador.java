@@ -33,4 +33,12 @@ public class TopicosControlador {
         return ResponseEntity.ok(repositorio.findAllByEstadoTrue(pagina).map(DatosMostrarTopicos::new));
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DatosMostrarTopicos> mostrarDatosTopico(@PathVariable Long id) {
+        Topico topico = repositorio.getReferenceById(id);
+
+        DatosMostrarTopicos datosTopico = new DatosMostrarTopicos(topico.getId(), topico.getTitulo(), topico.getMensaje(), topico.getAutor(), topico.getCurso(), topico.getFechaCreacion(), topico.isEstado());
+        return ResponseEntity.ok(datosTopico);
+    }
+
 }
